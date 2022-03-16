@@ -1,0 +1,4 @@
+package rs.strba.repo.data.repository.datasource
+
+interface RepoCacheDataSource {
+}
