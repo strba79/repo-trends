@@ -7,7 +7,7 @@ import rs.strba.repo.data.model.Repo
 import java.util.*
 
 interface GitHubApi {
-    @GET("?q=created:>lastSevenDays")
+    @GET("repositories?q=created:>lastSevenDays")
     suspend fun getRepos(
         @Query("lastSevenDays") lastSevenDays: Date?,
     ): Response<Repo>

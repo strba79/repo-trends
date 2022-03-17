@@ -16,6 +16,7 @@ class RepoRemoteDataSourceIMPL(private val gitHubApi: GitHubApi):RepoRemoteDataS
             try {
                 val response = gitHubApi.getRepos(sevenDaysAgo())
                 if (response.body() != null) {
+                    Log.i("checkFetch", response.body()!!.items.size.toString())
                     return@withContext response.body()!!.items
                 } else {
                     Log.i(TAG, "fetch else")

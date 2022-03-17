@@ -5,16 +5,17 @@ import dagger.Provides
 import rs.strba.repo.data.repository.RepoRepositoryIMPL
 import rs.strba.repo.data.repository.datasource.RepoCacheDataSource
 import rs.strba.repo.data.repository.datasource.RepoRemoteDataSource
+import rs.strba.repo.domain.repository.RepoRepository
 import javax.inject.Singleton
 
 @Module
 class RepositoryModule {
     @Singleton
     @Provides
-    fun provideEarthQuakeRepository(
+    fun provideRepoRepository(
         repoRemoteDataSource: RepoRemoteDataSource,
         repoCacheDataSource: RepoCacheDataSource
-    ): RepoRepositoryIMPL {
+    ): RepoRepository {
         return RepoRepositoryIMPL(
             repoRemoteDataSource,
             repoCacheDataSource
