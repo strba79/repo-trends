@@ -6,8 +6,8 @@ import retrofit2.http.Query
 import rs.strba.repo.data.model.Repo
 
 interface GitHubApi {
-    @GET("search/repositories")
+    @GET("/search/repositories")
     suspend fun getRepos(
-        @Query("q") q: String,
-    ): Response<Repo>
+      @Query("q") q: String,
+        ): Response<Repo>
 }

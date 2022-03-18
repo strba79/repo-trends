@@ -1,20 +1,24 @@
 package rs.strba.repo.data.repository.repoIMPL
 
 import android.util.Log
+import androidx.compose.runtime.snapshots.Snapshot.Companion.current
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import rs.strba.repo.data.model.Item
 import rs.strba.repo.data.repository.datasource.RepoRemoteDataSource
 import rs.strba.repo.networking.GitHubApi
+import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
 import java.util.*
 
-class RepoRemoteDataSourceIMPL(private val gitHubApi: GitHubApi):RepoRemoteDataSource {
+class RepoRemoteDataSourceIMPL(private val gitHubApi: GitHubApi) : RepoRemoteDataSource {
 
     override suspend fun getRepos(): List<Item> {
         return withContext(Dispatchers.IO) {
             try {
-                val response = gitHubApi.getRepos("2022-03-17")
-                Log.i("checkFetch","after")
+                Log.i("checkDate", sevenDaysAgo())
+                val response = gitHubApi.getRepos("created:>+${sevenDaysAgo()}")
+                Log.i("checkFetch", "after")
                 if (response.body() != null) {
                     Log.i("checkFetch", response.body()!!.items.size.toString())
                     return@withContext response.body()!!.items
@@ -27,9 +31,13 @@ class RepoRemoteDataSourceIMPL(private val gitHubApi: GitHubApi):RepoRemoteDataS
             }
         }
     }
-    private fun sevenDaysAgo(): Date {
+
+    private fun sevenDaysAgo(): String {
         val calendar = Calendar.getInstance()
         calendar.add(Calendar.DAY_OF_YEAR, -7)
-        return calendar.time
+        val pattern = "yyyy-MM-dd"
+        val simpleDateFormat = SimpleDateFormat(pattern)
+        val date = simpleDateFormat.format(calendar.time)
+        return date.toString()
     }
 }
