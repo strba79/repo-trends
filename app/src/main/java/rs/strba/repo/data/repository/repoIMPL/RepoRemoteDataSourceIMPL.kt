@@ -16,14 +16,10 @@ class RepoRemoteDataSourceIMPL(private val gitHubApi: GitHubApi) : RepoRemoteDat
     override suspend fun getRepos(): List<Item> {
         return withContext(Dispatchers.IO) {
             try {
-                Log.i("checkDate", sevenDaysAgo())
-                val response = gitHubApi.getRepos("created:>+${sevenDaysAgo()}")
-                Log.i("checkFetch", "after")
+                val response = gitHubApi.getRepos("created:>+${sevenDaysAgo()}",1,30)
                 if (response.body() != null) {
-                    Log.i("checkFetch", response.body()!!.items.size.toString())
                     return@withContext response.body()!!.items
                 } else {
-                    Log.i("checkFetch", response.body()!!.items.size.toString())
                     return@withContext response.body()!!.items
                 }
             } catch (t: Throwable) {
@@ -31,7 +27,6 @@ class RepoRemoteDataSourceIMPL(private val gitHubApi: GitHubApi) : RepoRemoteDat
             }
         }
     }
-
     private fun sevenDaysAgo(): String {
         val calendar = Calendar.getInstance()
         calendar.add(Calendar.DAY_OF_YEAR, -7)
