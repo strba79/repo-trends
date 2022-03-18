@@ -1,6 +1,5 @@
 package rs.strba.repo.data.repository.repoIMPL
 
-import android.content.ContentValues.TAG
 import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -14,12 +13,13 @@ class RepoRemoteDataSourceIMPL(private val gitHubApi: GitHubApi):RepoRemoteDataS
     override suspend fun getRepos(): List<Item> {
         return withContext(Dispatchers.IO) {
             try {
-                val response = gitHubApi.getRepos(sevenDaysAgo())
+                val response = gitHubApi.getRepos("2022-03-17")
+                Log.i("checkFetch","after")
                 if (response.body() != null) {
                     Log.i("checkFetch", response.body()!!.items.size.toString())
                     return@withContext response.body()!!.items
                 } else {
-                    Log.i(TAG, "fetch else")
+                    Log.i("checkFetch", response.body()!!.items.size.toString())
                     return@withContext response.body()!!.items
                 }
             } catch (t: Throwable) {

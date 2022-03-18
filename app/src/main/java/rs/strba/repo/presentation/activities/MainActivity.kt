@@ -2,6 +2,7 @@ package rs.strba.repo.presentation.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import rs.strba.repo.MyApplication
 import rs.strba.repo.R
@@ -21,6 +22,15 @@ class MainActivity : AppCompatActivity() {
         (application as ComponentInjector).createRepoSubComponent()
             .inject(this)
         model = ViewModelProvider(this, factory)[RepoViewModel::class.java]
-        model.getRepos()
+        liveDataObserver()
+    }
+
+    private fun liveDataObserver() {
+        val responseLiveDataGet = model.getRepos()
+        responseLiveDataGet.observe(this) {
+            if (it != null) {
+                Log.i("CHECK", it.size.toString())
+            }
+        }
     }
 }

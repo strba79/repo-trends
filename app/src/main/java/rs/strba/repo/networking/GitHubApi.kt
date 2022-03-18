@@ -4,11 +4,10 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 import rs.strba.repo.data.model.Repo
-import java.util.*
 
 interface GitHubApi {
-    @GET("repositories?q=created:>lastSevenDays")
+    @GET("search/repositories")
     suspend fun getRepos(
-        @Query("lastSevenDays") lastSevenDays: Date?,
+        @Query("q") q: String,
     ): Response<Repo>
 }

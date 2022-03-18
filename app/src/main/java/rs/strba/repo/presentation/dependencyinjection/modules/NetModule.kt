@@ -1,5 +1,8 @@
 package rs.strba.repo.presentation.dependencyinjection.modules
 
+import android.R
+import android.content.Context
+import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -9,6 +12,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import rs.strba.repo.Constants
 import rs.strba.repo.networking.GitHubApi
 import javax.inject.Singleton
+import javax.net.ssl.SSLContext
+
 
 @Module
 class NetModule {
@@ -17,10 +22,11 @@ class NetModule {
     @Provides
     fun loggingInterceptor() = HttpLoggingInterceptor()
 
+
     @Singleton
     @Provides
     fun okHttpClient(loggingInterceptor: HttpLoggingInterceptor) = OkHttpClient.Builder()
-        .addInterceptor(loggingInterceptor)
+        .addInterceptor(loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY))
         .build()
 
     @Singleton
