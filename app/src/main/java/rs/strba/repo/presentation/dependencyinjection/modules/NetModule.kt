@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import dagger.Module
 import dagger.Provides
+import okhttp3.Credentials
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -26,14 +27,6 @@ class NetModule {
     @Singleton
     @Provides
     fun okHttpClient(loggingInterceptor: HttpLoggingInterceptor) = OkHttpClient.Builder()
-        .addNetworkInterceptor { chain ->
-            chain.proceed(
-                chain.request()
-                    .newBuilder()
-                    .header("User-Agent", "Strba")
-                    .build()
-            )
-        }
         .addInterceptor(loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY))
         .build()
 

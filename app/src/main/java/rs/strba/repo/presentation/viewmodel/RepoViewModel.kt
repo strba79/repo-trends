@@ -10,9 +10,9 @@ class RepoViewModel(private val getReposUseCase: GetReposUseCase): ViewModel() {
 
     fun getRepos() = liveData {
         val repoFetchList = getReposUseCase.execute()
- /*       if (repoFetchList == null) {
-            repoListModel.addAll(repoFetchList)
-        }*/
+        if (repoFetchList != null) {
+            Log.i("checkFirst",repoFetchList[1].fullName)
+        }
         emit(repoFetchList)
     }
 }

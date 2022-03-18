@@ -2,7 +2,6 @@ package rs.strba.repo.data.repository
 
 import android.util.Log
 import rs.strba.repo.data.model.Item
-import rs.strba.repo.data.model.Repo
 import rs.strba.repo.data.repository.datasource.RepoCacheDataSource
 import rs.strba.repo.data.repository.datasource.RepoRemoteDataSource
 import rs.strba.repo.data.repository.repoIMPL.RepoRemoteDataSourceIMPL
@@ -16,6 +15,11 @@ class RepoRepositoryIMPL(
         Log.i("checkStatus","ok")
         return getReposFromCache()
     }
+
+    override suspend fun getReposTest(): RepoRemoteDataSourceIMPL.Result {
+        return repoRemoteDataSource.getReposTest()
+    }
+
     private suspend fun getReposFromAPI(): List<Item> {
         return repoRemoteDataSource.getRepos()
     }
