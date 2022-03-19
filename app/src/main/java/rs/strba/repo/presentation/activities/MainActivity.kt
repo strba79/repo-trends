@@ -1,18 +1,18 @@
 package rs.strba.repo.presentation.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import rs.strba.repo.MyApplication
 import rs.strba.repo.R
+import rs.strba.repo.data.model.Item
 import rs.strba.repo.presentation.adapters.RepoAdapter
 import rs.strba.repo.presentation.dependencyinjection.ComponentInjector
+import rs.strba.repo.presentation.viewmodel.RepoViewModel
 import rs.strba.repo.presentation.viewmodel.RepoViewModelFactory
 import javax.inject.Inject
-import rs.strba.repo.presentation.viewmodel.RepoViewModel as RepoViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
@@ -27,17 +27,14 @@ class MainActivity : AppCompatActivity() {
         (application as ComponentInjector).createRepoSubComponent()
             .inject(this)
         model = ViewModelProvider(this, factory)[RepoViewModel::class.java]
-        liveDataObserver()
         recyclerView = findViewById(R.id.rwRepos)
         recyclerView.layoutManager = LinearLayoutManager(this)
-
-
-    }
-
-    private fun liveDataObserver() {
-        val responseLiveDataGet = model.getRepos()
-        responseLiveDataGet.observe(this) {
-            recyclerView.adapter = it?.let { it1 -> RepoAdapter(it1) }
+        val myAdapter = RepoAdapter()
+        recyclerView.adapter = myAdapter
+        this.model.getRepos().observe(this) {
+            myAdapter.submitList(it)
         }
+
     }
+
 }

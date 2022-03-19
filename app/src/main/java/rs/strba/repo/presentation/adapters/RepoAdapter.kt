@@ -9,7 +9,15 @@ import rs.strba.repo.R
 import rs.strba.repo.data.model.Item
 
 
-class RepoAdapter(var repos: List<Item>) : RecyclerView.Adapter<RepoAdapter.RepoViewHolder>() {
+class RepoAdapter() : RecyclerView.Adapter<RepoAdapter.RepoViewHolder>() {
+
+    private val myRepoData = mutableListOf<Item>()
+
+    fun submitList(newData: List<Item>) {
+        myRepoData.clear()
+        myRepoData.addAll(newData)
+        notifyDataSetChanged()
+    }
 
     inner class RepoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -20,16 +28,16 @@ class RepoAdapter(var repos: List<Item>) : RecyclerView.Adapter<RepoAdapter.Repo
 
     override fun onBindViewHolder(holder: RepoViewHolder, position: Int) {
         holder.itemView.findViewById<TextView>(R.id.tvTitle).text =
-            repos[position].fullName
+            myRepoData[position].fullName
         holder.itemView.findViewById<TextView>(R.id.tvForkNumber).text =
-            repos[position].forksCount.toString()
+            myRepoData[position].forksCount.toString()
         holder.itemView.findViewById<TextView>(R.id.tvStarNumber).text =
-            repos[position].stargazersCount.toString()
+            myRepoData[position].stargazersCount.toString()
         holder.itemView.findViewById<TextView>(R.id.tvDescription).text =
-            repos[position].description.toString()
+            myRepoData[position].description.toString()
     }
 
     override fun getItemCount(): Int {
-        return repos.size
+        return myRepoData.size
     }
 }

@@ -9,8 +9,8 @@
         android:id="@+id/carView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp"
-        card_view:cardCornerRadius="2dp"
+        android:padding="50dp"
+        card_view:cardCornerRadius="5dp"
         card_view:contentPadding= "5dp"
         card_view:cardUseCompatPadding="true">
 
