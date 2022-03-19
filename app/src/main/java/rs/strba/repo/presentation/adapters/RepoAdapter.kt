@@ -1,7 +1,5 @@
 package rs.strba.repo.presentation.adapters
 
-import android.content.ClipData
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +21,12 @@ class RepoAdapter(var repos: List<Item>) : RecyclerView.Adapter<RepoAdapter.Repo
     override fun onBindViewHolder(holder: RepoViewHolder, position: Int) {
         holder.itemView.findViewById<TextView>(R.id.tvTitle).text =
             repos[position].fullName
+        holder.itemView.findViewById<TextView>(R.id.tvForkNumber).text =
+            repos[position].forksCount.toString()
+        holder.itemView.findViewById<TextView>(R.id.tvStarNumber).text =
+            repos[position].stargazersCount.toString()
+        holder.itemView.findViewById<TextView>(R.id.tvDescription).text =
+            repos[position].description.toString()
     }
 
     override fun getItemCount(): Int {

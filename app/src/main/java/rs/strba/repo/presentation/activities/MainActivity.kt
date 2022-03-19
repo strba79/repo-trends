@@ -31,16 +31,13 @@ class MainActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.rwRepos)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
+
     }
 
     private fun liveDataObserver() {
         val responseLiveDataGet = model.getRepos()
-        //Log.i("checkLiveData", responseLiveDataGet.value?.size.toString())
         responseLiveDataGet.observe(this) {
-            if (it != null) {
-                Log.i("checkLiveData!", it.size.toString())
-                recyclerView.adapter = RepoAdapter(it)
-            }
+            recyclerView.adapter = it?.let { it1 -> RepoAdapter(it1) }
         }
     }
 }
