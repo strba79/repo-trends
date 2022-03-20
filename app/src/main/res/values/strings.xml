@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Repo trends...</string>
+    <string name="nameview">NameView</string>
+    <string name="forknumberview">ForkNumberView</string>
+    <string name="starnumberview">StarNumberView</string>
+    <string name="descriptionview">DescriptionView</string>
 </resources>

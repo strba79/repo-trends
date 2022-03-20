@@ -26,9 +26,15 @@ class RecyclerViewAdapter :
     }
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        private val name: TextView = view.findViewById(R.id.tvTitle)
+        private val starNumber: TextView = view.findViewById(R.id.tvStarNumber)
+        private val forkNumber: TextView = view.findViewById(R.id.tvForkNumber)
         private val description: TextView = view.findViewById(R.id.tvDescription)
         fun bind(item: Item?) {
             if (item != null) {
+                name.text = item.name
+                starNumber.text = item.stargazersCount.toString()
+                forkNumber.text = item.forksCount.toString()
                 description.text = item.description as CharSequence
             }
         }

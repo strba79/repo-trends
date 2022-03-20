@@ -23,10 +23,11 @@
 
             <TextView
                 android:id="@+id/tvTitle"
+                android:maxLength="30"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="9dp"
-                android:text="NameView"
+                android:text="@string/nameview"
                 android:textColor="@color/black"
                 card_view:layout_constraintBottom_toTopOf="@+id/imageViewStar"
                 card_view:layout_constraintStart_toStartOf="@+id/imageViewStar" />
@@ -37,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginBottom="2dp"
-                android:text="ForkNumberView"
+                android:text="@string/forknumberview"
                 android:textColor="@color/black"
                 card_view:layout_constraintBottom_toBottomOf="@+id/imageViewFork"
                 card_view:layout_constraintStart_toEndOf="@+id/imageViewFork" />
@@ -47,7 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="StarNumberView"
+                android:text="@string/starnumberview"
                 android:textColor="@color/black"
                 card_view:layout_constraintStart_toEndOf="@+id/imageViewStar"
                 card_view:layout_constraintTop_toTopOf="@+id/imageViewStar" />
@@ -58,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:maxLength="30"
-                android:text="DescriptionView"
+                android:text="@string/descriptionview"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 card_view:layout_constraintBottom_toBottomOf="parent"

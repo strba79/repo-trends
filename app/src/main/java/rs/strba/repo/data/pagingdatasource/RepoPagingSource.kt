@@ -1,11 +1,13 @@
 package rs.strba.repo.data.pagingdatasource
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import rs.strba.repo.data.model.Item
 import rs.strba.repo.networking.GitHubApi
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class RepoPagingSource(private val gitHubApi: GitHubApi) : PagingSource<Int, Item>() {
 
@@ -17,11 +19,11 @@ class RepoPagingSource(private val gitHubApi: GitHubApi) : PagingSource<Int, Ite
         return try {
             val nextPage = params.key ?: FIRST_PAGE_INDEX
             val response = gitHubApi.getRepos("created:>+${sevenDaysAgo()}", nextPage)
-            val nextPageNumber: Int? = null
+            Log.i("checkPageNumber",nextPage.toString())
             LoadResult.Page(
                 data = response.body()!!.items,
                 prevKey = null,
-                nextKey = nextPageNumber
+                nextKey = nextPage + 1
             )
         } catch (e: Exception) {
             LoadResult.Error(e)
