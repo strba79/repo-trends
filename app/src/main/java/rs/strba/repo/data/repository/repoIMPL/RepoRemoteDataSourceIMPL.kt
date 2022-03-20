@@ -26,7 +26,7 @@ class RepoRemoteDataSourceIMPL(private val gitHubApi: GitHubApi) : RepoRemoteDat
         return withContext(Dispatchers.IO) {
             try {
                 Log.i("checkData","ok")
-                val response = gitHubApi.getRepos("created:>+${sevenDaysAgo()}")
+                val response = gitHubApi.getRepos("created:>+${sevenDaysAgo()}",1)
                 Log.i("response", response.body()?.items?.size.toString())
                 if (response.isSuccessful && response.body() != null) {
                     Log.i(TAG, response.body()!!.items.size.toString())
@@ -48,7 +48,7 @@ class RepoRemoteDataSourceIMPL(private val gitHubApi: GitHubApi) : RepoRemoteDat
     override suspend fun getRepos(): List<Item> {
         return withContext(Dispatchers.IO) {
             try {
-                val response = gitHubApi.getRepos("created:>+${sevenDaysAgo()}")
+                val response = gitHubApi.getRepos("created:>+${sevenDaysAgo()}",1)
                 if (response.body() != null) {
                     return@withContext response.body()!!.items
                 } else {

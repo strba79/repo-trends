@@ -9,7 +9,7 @@ import rs.strba.repo.R
 import rs.strba.repo.data.model.Item
 
 
-class RepoAdapter() : RecyclerView.Adapter<RepoAdapter.RepoViewHolder>() {
+class RecycleViewAdapter : RecyclerView.Adapter<RecycleViewAdapter.RepoViewHolder>() {
 
     private val myRepoData = mutableListOf<Item>()
 
@@ -34,7 +34,7 @@ class RepoAdapter() : RecyclerView.Adapter<RepoAdapter.RepoViewHolder>() {
         holder.itemView.findViewById<TextView>(R.id.tvStarNumber).text =
             myRepoData[position].stargazersCount.toString()
         holder.itemView.findViewById<TextView>(R.id.tvDescription).text =
-            myRepoData[position].description.toString()
+            myRepoData[position].description as CharSequence?
     }
 
     override fun getItemCount(): Int {
