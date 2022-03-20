@@ -1,6 +1,6 @@
 package rs.strba.repo.data.pagingdatasource
 
-import android.util.Log
+
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import rs.strba.repo.data.model.Item
@@ -12,27 +12,24 @@ import java.util.*
 class RepoPagingSource(private val gitHubApi: GitHubApi) : PagingSource<Int, Item>() {
 
     override fun getRefreshKey(state: PagingState<Int, Item>): Int? {
-        return state.anchorPosition
+        return state.anchorPosition?.let { anchorPosition ->
+            val anchorPage = state.closestPageToPosition(anchorPosition)
+            anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
+        }
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Item> {
         return try {
-            val nextPage = params.key ?: FIRST_PAGE_INDEX
-            val response = gitHubApi.getRepos("created:>+${sevenDaysAgo()}", nextPage)
-            Log.i("checkPageNumber",nextPage.toString())
+            val position = params.key ?: 1
+            val response = gitHubApi.getRepos("created:>+${sevenDaysAgo()}", position)
             LoadResult.Page(
                 data = response.body()!!.items,
-                prevKey = null,
-                nextKey = nextPage + 1
+                prevKey = position-1,
+                nextKey = position+1,
             )
         } catch (e: Exception) {
             LoadResult.Error(e)
         }
-
-    }
-
-    companion object {
-        private const val FIRST_PAGE_INDEX = 1
     }
 
     private fun sevenDaysAgo(): String {
