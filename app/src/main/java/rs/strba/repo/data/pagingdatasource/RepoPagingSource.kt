@@ -20,11 +20,11 @@ class RepoPagingSource(private val gitHubApi: GitHubApi) : PagingSource<Int, Ite
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Item> {
         return try {
-            val position = params.key ?: 1
+            val position = params.key ?: 0
             val response = gitHubApi.getRepos("created:>+${sevenDaysAgo()}", position)
             LoadResult.Page(
                 data = response.body()!!.items,
-                prevKey = position-1,
+                prevKey = if(position==0)null else position-1,
                 nextKey = position+1,
             )
         } catch (e: Exception) {
