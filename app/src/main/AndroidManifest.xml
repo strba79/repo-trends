@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Repo">
         <activity
-            android:name=".presentation.activities.DetailActivity"
+            android:name=".presentation.activities.RepoDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.activities.MainActivity"

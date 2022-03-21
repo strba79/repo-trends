@@ -1,6 +1,8 @@
 package rs.strba.repo.presentation.activities
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -42,7 +44,11 @@ class MainActivity : AppCompatActivity(),RecyclerViewAdapter.OnItemClickListener
 
     }
     override fun onItemClick(position: Int) {
-        Toast.makeText(this,position.toString(),Toast.LENGTH_SHORT).show()
+        //Toast.makeText(this,position.toString(),Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, RepoDetailsActivity::class.java).apply {
+            putExtra(EXTRA_MESSAGE, position)
+        }
+        startActivity(intent)
     }
 
 }

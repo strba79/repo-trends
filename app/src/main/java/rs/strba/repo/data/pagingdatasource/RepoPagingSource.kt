@@ -17,7 +17,6 @@ class RepoPagingSource(private val gitHubApi: GitHubApi) : PagingSource<Int, Ite
             anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
         }
     }
-
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Item> {
         return try {
             val position = params.key ?: 0
