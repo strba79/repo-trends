@@ -1,6 +1,7 @@
 package rs.strba.repo.presentation.activities
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -16,7 +17,7 @@ import rs.strba.repo.presentation.viewmodel.RepoViewModel
 import rs.strba.repo.presentation.viewmodel.RepoViewModelFactory
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),RecyclerViewAdapter.OnItemClickListener {
     private lateinit var recyclerView: RecyclerView
     @Inject
     lateinit var factory: RepoViewModelFactory
@@ -31,12 +32,17 @@ class MainActivity : AppCompatActivity() {
         model = ViewModelProvider(this, factory)[RepoViewModel::class.java]
         recyclerView = findViewById(R.id.rwRepos)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        val myAdapter = RecyclerViewAdapter()
+        val myAdapter = RecyclerViewAdapter(this)
         recyclerView.adapter = myAdapter
         lifecycleScope.launchWhenCreated {
             model.getReposPaged().collectLatest {
                 myAdapter.submitData(it)
             }
         }
+
     }
+    override fun onItemClick(position: Int) {
+        Toast.makeText(this,position.toString(),Toast.LENGTH_SHORT).show()
+    }
+
 }
