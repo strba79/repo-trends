@@ -13,7 +13,7 @@ class RepoDetailsActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val message = intent.getIntExtra(EXTRA_MESSAGE,0)
-        val textView = findViewById<TextView>(R.id.tvItemNumber)
+        val textView = findViewById<TextView>(R.id.tvDescriptionDetails)
         textView.text=message.toString()
     }
     override fun onSupportNavigateUp(): Boolean {
