@@ -27,7 +27,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="13dp"
             android:layout_marginBottom="17dp"
-            android:text="Repo description"
+            android:text="@string/repo_description"
             android:textSize="20sp" />
 
         <RelativeLayout
@@ -39,27 +39,27 @@
 
             <ImageView
                 android:id="@+id/imageViewStars"
-                android:layout_marginStart="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
                 android:src="@drawable/ic_baseline_stars" />
 
             <TextView
                 android:id="@+id/tvStarsDetails"
                 android:layout_width="196dp"
                 android:layout_height="26dp"
-                android:layout_marginStart="20dp"
                 android:layout_gravity="center"
+                android:layout_marginStart="20dp"
                 android:layout_toRightOf="@id/imageViewStars"
-                android:text="Number of stars"
-                android:textSize="20sp" />
+                android:text="@string/number_of_stars"
+                android:textSize="19sp" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_gravity="center"
+            android:layout_marginTop="20dp"
             android:gravity="center">
 
             <ImageView
@@ -73,11 +73,11 @@
                 android:id="@+id/tvForkNumberDetails"
                 android:layout_width="196dp"
                 android:layout_height="26dp"
-                android:layout_marginStart="20dp"
                 android:layout_gravity="center"
+                android:layout_marginStart="20dp"
                 android:layout_toRightOf="@id/imageViewForks"
-                android:text="Number of forks"
-                android:textSize="20sp" />
+                android:text="@string/number_of_forks"
+                android:textSize="19sp" />
         </RelativeLayout>
 
         <WebView
