@@ -47,10 +47,12 @@ class MainActivity : AppCompatActivity(),RecyclerViewAdapter.OnItemClickListener
         val intent = Intent(this, RepoDetailsActivity::class.java).apply {
             putExtra(EXTRA_MESSAGE, position)
             if (item != null) {
+                val description=item.description.toString()
+                putExtra("DESCRIPTION",description)
                 putExtra("FORKS",item.forksCount)
                 putExtra("STARS",item.stargazersCount)
                 putExtra("AVATAR",item.owner.avatarUrl)
-                //putExtra("OWNER",item.)
+                putExtra("OWNER",item.owner.login)
                 putExtra("REPO",item.name)
                 putExtra("BRANCH",item.defaultBranch)
             }
