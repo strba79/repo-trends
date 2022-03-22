@@ -34,33 +34,51 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="15dp"
             android:gravity="center">
 
             <ImageView
                 android:id="@+id/imageViewStars"
+                android:layout_marginStart="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_stars" />
 
             <TextView
                 android:id="@+id/tvStarsDetails"
-                android:layout_toRightOf="@id/imageViewStars"
                 android:layout_width="196dp"
                 android:layout_height="26dp"
+                android:layout_marginStart="20dp"
                 android:layout_gravity="center"
+                android:layout_toRightOf="@id/imageViewStars"
                 android:text="Number of stars"
                 android:textSize="20sp" />
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tvForkNumberDetails"
-            android:layout_width="196dp"
-            android:layout_height="26dp"
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:layout_gravity="center"
-            android:layout_marginTop="13dp"
-            android:layout_marginBottom="17dp"
-            android:text="Number of forks"
-            android:textSize="20sp" />
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imageViewForks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/ic_baseline_fork" />
+
+            <TextView
+                android:id="@+id/tvForkNumberDetails"
+                android:layout_width="196dp"
+                android:layout_height="26dp"
+                android:layout_marginStart="20dp"
+                android:layout_gravity="center"
+                android:layout_toRightOf="@id/imageViewForks"
+                android:text="Number of forks"
+                android:textSize="20sp" />
+        </RelativeLayout>
 
         <WebView
             android:id="@+id/wvReadme"
