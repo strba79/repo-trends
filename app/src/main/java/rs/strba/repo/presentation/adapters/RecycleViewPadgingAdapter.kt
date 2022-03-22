@@ -49,7 +49,7 @@ class RecyclerViewAdapter(private val listener: OnItemClickListener) :
         }
 
         override fun onClick(p0: View?) {
-            listener.onItemClick(adapterPosition)
+            listener.onItemClick(adapterPosition,getItem(adapterPosition))
         }
 
 
@@ -66,6 +66,6 @@ class RecyclerViewAdapter(private val listener: OnItemClickListener) :
     }
 
     interface OnItemClickListener {
-        fun onItemClick(position: Int)
+        fun onItemClick(position: Int, item: Item?)
     }
 }

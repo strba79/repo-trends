@@ -3,7 +3,6 @@ package rs.strba.repo.presentation.activities
 import android.content.Intent
 import android.os.Bundle
 import android.provider.AlarmClock.EXTRA_MESSAGE
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -12,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.flow.collectLatest
 import rs.strba.repo.MyApplication
 import rs.strba.repo.R
+import rs.strba.repo.data.model.Item
 import rs.strba.repo.networking.GitHubApi
 import rs.strba.repo.presentation.adapters.RecyclerViewAdapter
 import rs.strba.repo.presentation.dependencyinjection.ComponentInjector
@@ -43,10 +43,17 @@ class MainActivity : AppCompatActivity(),RecyclerViewAdapter.OnItemClickListener
         }
 
     }
-    override fun onItemClick(position: Int) {
-        //Toast.makeText(this,position.toString(),Toast.LENGTH_SHORT).show()
+    override fun onItemClick(position: Int, item: Item?) {
         val intent = Intent(this, RepoDetailsActivity::class.java).apply {
             putExtra(EXTRA_MESSAGE, position)
+            if (item != null) {
+                putExtra("FORKS",item.forksCount)
+                putExtra("STARS",item.stargazersCount)
+                putExtra("AVATAR",item.owner.avatarUrl)
+                //putExtra("OWNER",item.)
+                putExtra("REPO",item.name)
+                putExtra("BRANCH",item.defaultBranch)
+            }
         }
         startActivity(intent)
     }
