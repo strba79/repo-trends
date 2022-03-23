@@ -23,10 +23,10 @@
 
             <TextView
                 android:id="@+id/tvTitle"
-                android:maxLength="30"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="9dp"
+                android:maxLength="30"
                 android:text="@string/nameview"
                 android:textColor="@color/black"
                 card_view:layout_constraintBottom_toTopOf="@+id/imageViewStar"

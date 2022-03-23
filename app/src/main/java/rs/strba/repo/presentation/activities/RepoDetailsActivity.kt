@@ -7,16 +7,17 @@ import android.widget.ImageView
 import android.widget.ScrollView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.bumptech.glide.Glide
 import rs.strba.repo.R
 
 
 class RepoDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         val scrollView: ScrollView = findViewById(R.id.scrollView)
         scrollView.post { scrollView.scrollTo(0, 0) }
         val description = intent.getStringExtra("DESCRIPTION")

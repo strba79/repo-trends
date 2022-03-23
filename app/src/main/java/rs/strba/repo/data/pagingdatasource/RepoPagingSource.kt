@@ -11,6 +11,10 @@ import java.util.*
 
 class RepoPagingSource(private val gitHubApi: GitHubApi) : PagingSource<Int, Item>() {
 
+    interface onRefreshClickedListener {
+        fun onRefreshClicked()
+    }
+
     override fun getRefreshKey(state: PagingState<Int, Item>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             val anchorPage = state.closestPageToPosition(anchorPosition)
@@ -28,6 +32,8 @@ class RepoPagingSource(private val gitHubApi: GitHubApi) : PagingSource<Int, Ite
             )
         } catch (e: Exception) {
             LoadResult.Error(e)
+        }finally {
+
         }
     }
 

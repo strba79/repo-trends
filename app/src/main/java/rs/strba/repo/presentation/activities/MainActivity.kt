@@ -3,12 +3,17 @@ package rs.strba.repo.presentation.activities
 import android.content.Intent
 import android.os.Bundle
 import android.provider.AlarmClock.EXTRA_MESSAGE
+import android.text.TextUtils
+import android.view.View
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import rs.strba.repo.MyApplication
 import rs.strba.repo.R
@@ -20,12 +25,13 @@ import rs.strba.repo.presentation.viewmodel.RepoViewModel
 import rs.strba.repo.presentation.viewmodel.RepoViewModelFactory
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(),RecyclerViewAdapter.OnItemClickListener {
+class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnItemClickListener {
     private lateinit var recyclerView: RecyclerView
     @Inject
     lateinit var factory: RepoViewModelFactory
     lateinit var model: RepoViewModel
     lateinit var gitHubApi: GitHubApi
+
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
@@ -43,23 +49,25 @@ class MainActivity : AppCompatActivity(),RecyclerViewAdapter.OnItemClickListener
                 myAdapter.submitData(it)
             }
         }
-
     }
+
+
     override fun onItemClick(position: Int, item: Item?) {
         val intent = Intent(this, RepoDetailsActivity::class.java).apply {
             putExtra(EXTRA_MESSAGE, position)
             if (item != null) {
-                val description=item.description.toString()
-                putExtra("DESCRIPTION",description)
-                putExtra("FORKS",item.forksCount)
-                putExtra("STARS",item.stargazersCount)
-                putExtra("AVATAR",item.owner.avatarUrl)
-                putExtra("OWNER",item.owner.login)
-                putExtra("REPO",item.name)
-                putExtra("BRANCH",item.defaultBranch)
+                if (item.description!=null) {
+                    val description = item.description.toString()
+                    putExtra("DESCRIPTION", description)
+                }
+                putExtra("FORKS", item.forksCount)
+                putExtra("STARS", item.stargazersCount)
+                putExtra("AVATAR", item.owner.avatarUrl)
+                putExtra("OWNER", item.owner.login)
+                putExtra("REPO", item.name)
+                putExtra("BRANCH", item.defaultBranch)
             }
         }
         startActivity(intent)
     }
-
 }

@@ -1,5 +1,6 @@
 package rs.strba.repo.presentation.adapters
 
+import android.text.TextUtils
 import android.view.LayoutInflater
 
 import android.view.View
@@ -31,9 +32,9 @@ class RecyclerViewAdapter(private val listener: OnItemClickListener) :
     inner class MyViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
-            init {
-                itemView.setOnClickListener(this)
-            }
+        init {
+            itemView.setOnClickListener(this)
+        }
 
         private val name: TextView = itemView.findViewById(R.id.tvTitle)
         private val starNumber: TextView = itemView.findViewById(R.id.tvStarNumber)
@@ -41,15 +42,23 @@ class RecyclerViewAdapter(private val listener: OnItemClickListener) :
         private val description: TextView = itemView.findViewById(R.id.tvDescription)
         fun bind(item: Item?) {
             if (item != null) {
-                name.text = item.name
-                starNumber.text = item.stargazersCount.toString()
-                forkNumber.text = item.forksCount.toString()
-                description.text = item.description as CharSequence
+                if (!TextUtils.isEmpty(name.text)) {
+                    name.text = item.name
+                }
+                if (!TextUtils.isEmpty(starNumber.text)) {
+                    starNumber.text = item.stargazersCount.toString()
+                }
+                if (!TextUtils.isEmpty(forkNumber.text)) {
+                    forkNumber.text = item.forksCount.toString()
+                }
+                if (!TextUtils.isEmpty(description.text)) {
+                    description.text = item.description as CharSequence
+                }
             }
         }
 
         override fun onClick(p0: View?) {
-            listener.onItemClick(adapterPosition,getItem(adapterPosition))
+            listener.onItemClick(adapterPosition, getItem(adapterPosition))
         }
 
 
