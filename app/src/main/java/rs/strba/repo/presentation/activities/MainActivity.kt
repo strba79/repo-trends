@@ -1,24 +1,19 @@
 package rs.strba.repo.presentation.activities
 
+import android.R
 import android.content.Intent
 import android.os.Bundle
 import android.provider.AlarmClock.EXTRA_MESSAGE
-import android.text.TextUtils
 import android.view.View
-import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import rs.strba.repo.MyApplication
-import rs.strba.repo.R
 import rs.strba.repo.data.model.Item
-import rs.strba.repo.data.pagingdatasource.RepoPagingSource
 import rs.strba.repo.databinding.ActivityMainBinding
 import rs.strba.repo.networking.GitHubApi
 import rs.strba.repo.presentation.adapters.RecyclerViewAdapter
@@ -26,6 +21,7 @@ import rs.strba.repo.presentation.dependencyinjection.ComponentInjector
 import rs.strba.repo.presentation.viewmodel.RepoViewModel
 import rs.strba.repo.presentation.viewmodel.RepoViewModelFactory
 import javax.inject.Inject
+
 
 class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnItemClickListener {
     private lateinit var recyclerView: RecyclerView
@@ -44,6 +40,8 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnItemClickListene
         (application as MyApplication).appComponent.repoSubComponent().create()
         (application as ComponentInjector).createRepoSubComponent()
             .inject(this)
+        setSupportActionBar(binding.repoToolbar)
+        supportActionBar?.setIcon(R.drawable.star_on)
         model = ViewModelProvider(this, factory)[RepoViewModel::class.java]
         recyclerView = binding.rwRepos
         recyclerView.layoutManager = LinearLayoutManager(this)

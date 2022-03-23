@@ -3,7 +3,7 @@
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
         <item name="windowSplashScreenIconBackgroundColor">#c7c7c7</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_baseline_stars</item>
-        <item name="windowSplashScreenAnimationDuration">400</item>
+        <item name="windowSplashScreenAnimationDuration">800</item>
         <item name="postSplashScreenTheme">@style/Theme.Repo</item>
     </style>
 </resources>

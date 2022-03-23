@@ -1,17 +1,11 @@
 package rs.strba.repo.presentation.activities
 
 import android.os.Bundle
-import android.view.View
-import android.webkit.WebView
-import android.widget.ImageView
-import android.widget.ScrollView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.bumptech.glide.Glide
 import rs.strba.repo.R
 import rs.strba.repo.databinding.ActivityDetailBinding
-import rs.strba.repo.databinding.ActivityMainBinding
 
 
 class RepoDetailsActivity : AppCompatActivity() {
@@ -22,6 +16,7 @@ class RepoDetailsActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        setSupportActionBar(binding.repoDetailsToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         binding.scrollView.post { binding.scrollView.scrollTo(0, 0) }
         val description = intent.getStringExtra("DESCRIPTION")
@@ -38,13 +33,13 @@ class RepoDetailsActivity : AppCompatActivity() {
             Glide.with(this).load(avatarUrl)
                 .placeholder(R.drawable.ic_launcher_background)
                 .error(R.drawable.ic_launcher_background)
-                .into(binding.ivAvatar);
+                .into(binding.ivAvatar)
         }
         val owner = intent.getStringExtra("OWNER")
         val repo = intent.getStringExtra("REPO")
         val branch = intent.getStringExtra("BRANCH")
         val readmeUrl = "https://raw.githubusercontent.com/$owner/$repo/$branch/README.md"
-        binding.wvReadme.loadUrl(readmeUrl);
+        binding.wvReadme.loadUrl(readmeUrl)
     }
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()

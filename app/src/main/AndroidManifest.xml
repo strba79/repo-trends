@@ -11,6 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.App.Starting">
         <activity
+            android:label="Repository details"
             android:name=".presentation.activities.RepoDetailsActivity"
             android:exported="false" />
         <activity
