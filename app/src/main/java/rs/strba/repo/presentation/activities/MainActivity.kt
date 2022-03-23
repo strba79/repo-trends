@@ -18,6 +18,8 @@ import kotlinx.coroutines.flow.collectLatest
 import rs.strba.repo.MyApplication
 import rs.strba.repo.R
 import rs.strba.repo.data.model.Item
+import rs.strba.repo.data.pagingdatasource.RepoPagingSource
+import rs.strba.repo.databinding.ActivityMainBinding
 import rs.strba.repo.networking.GitHubApi
 import rs.strba.repo.presentation.adapters.RecyclerViewAdapter
 import rs.strba.repo.presentation.dependencyinjection.ComponentInjector
@@ -27,6 +29,7 @@ import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnItemClickListener {
     private lateinit var recyclerView: RecyclerView
+    private lateinit var binding: ActivityMainBinding
     @Inject
     lateinit var factory: RepoViewModelFactory
     lateinit var model: RepoViewModel
@@ -35,12 +38,14 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnItemClickListene
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
         (application as MyApplication).appComponent.repoSubComponent().create()
         (application as ComponentInjector).createRepoSubComponent()
             .inject(this)
         model = ViewModelProvider(this, factory)[RepoViewModel::class.java]
-        recyclerView = findViewById(R.id.rwRepos)
+        recyclerView = binding.rwRepos
         recyclerView.layoutManager = LinearLayoutManager(this)
         val myAdapter = RecyclerViewAdapter(this)
         recyclerView.adapter = myAdapter
@@ -50,8 +55,6 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnItemClickListene
             }
         }
     }
-
-
     override fun onItemClick(position: Int, item: Item?) {
         val intent = Intent(this, RepoDetailsActivity::class.java).apply {
             putExtra(EXTRA_MESSAGE, position)

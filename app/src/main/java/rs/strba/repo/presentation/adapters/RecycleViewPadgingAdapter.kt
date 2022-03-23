@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import rs.strba.repo.R
 import rs.strba.repo.data.model.Item
 
@@ -65,6 +66,7 @@ class RecyclerViewAdapter(private val listener: OnItemClickListener) :
     }
 
     class DiffUtilCallBack : DiffUtil.ItemCallback<Item>() {
+
         override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
             return oldItem.name == newItem.name
         }

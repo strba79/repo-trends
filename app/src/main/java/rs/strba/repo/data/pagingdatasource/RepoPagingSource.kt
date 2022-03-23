@@ -3,6 +3,7 @@ package rs.strba.repo.data.pagingdatasource
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import rs.strba.repo.data.model.Item
 import rs.strba.repo.networking.GitHubApi
 import java.text.SimpleDateFormat
@@ -11,9 +12,6 @@ import java.util.*
 
 class RepoPagingSource(private val gitHubApi: GitHubApi) : PagingSource<Int, Item>() {
 
-    interface onRefreshClickedListener {
-        fun onRefreshClicked()
-    }
 
     override fun getRefreshKey(state: PagingState<Int, Item>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
@@ -36,7 +34,6 @@ class RepoPagingSource(private val gitHubApi: GitHubApi) : PagingSource<Int, Ite
 
         }
     }
-
     private fun sevenDaysAgo(): String {
         val calendar = Calendar.getInstance()
         calendar.add(Calendar.DAY_OF_YEAR, -7)
