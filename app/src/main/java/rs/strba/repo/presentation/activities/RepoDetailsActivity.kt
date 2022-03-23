@@ -31,8 +31,8 @@ class RepoDetailsActivity : AppCompatActivity() {
         val avatarUrl = intent.getStringExtra("AVATAR")
         if (avatarUrl != null) {
             Glide.with(this).load(avatarUrl)
-                .placeholder(R.drawable.ic_launcher_background)
-                .error(R.drawable.ic_launcher_background)
+                .placeholder(R.drawable.ic_baseline_baby_changing_station)
+                .error(R.drawable.ic_baseline_baby_changing_station)
                 .into(binding.ivAvatar)
         }
         val owner = intent.getStringExtra("OWNER")
