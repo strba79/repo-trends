@@ -8,7 +8,6 @@ import rs.strba.repo.networking.GitHubApi
 import javax.inject.Singleton
 @Module
 class RemoteDataModule {
-
     @Singleton
     @Provides
     fun provideRepoRemoteDataSource(gitHubApi: GitHubApi): RepoRemoteDataSource {

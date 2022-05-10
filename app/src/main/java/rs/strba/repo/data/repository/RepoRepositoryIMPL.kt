@@ -1,6 +1,5 @@
 package rs.strba.repo.data.repository
 
-import android.util.Log
 import rs.strba.repo.data.model.Item
 import rs.strba.repo.data.repository.datasource.RepoCacheDataSource
 import rs.strba.repo.data.repository.datasource.RepoRemoteDataSource
@@ -12,24 +11,19 @@ class RepoRepositoryIMPL(
     private val repoCacheDataSource: RepoCacheDataSource
 ):RepoRepository {
     override suspend fun getRepos(): List<Item> {
-        Log.i("checkStatus","ok")
         return getReposFromCache()
     }
-
     override suspend fun getReposTest(): RepoRemoteDataSourceIMPL.Result {
         return repoRemoteDataSource.getReposTest()
     }
-
     private suspend fun getReposFromAPI(): List<Item> {
         return repoRemoteDataSource.getRepos()
     }
     private suspend fun getReposFromCache(): List<Item> {
         lateinit var repoList: List<Item>
-        Log.i("checkStatus","ok")
         try {
             repoList = repoCacheDataSource.getReposFromCache()
         } catch (exception: Exception) {
-            Log.i("checkStatus","not-ok")
         }
         if (repoList.isNotEmpty()) {
             return repoList

@@ -1,105 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/scrollView"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <LinearLayout
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/repoDetails_toolbar"
         android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark" />
+    <ProgressBar
+        android:id="@+id/progressBarDetails"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/repoDetails_toolbar"
+        android:indeterminateTint="@color/purple_500" />
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshDetails"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:elevation="4dp"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp">
-
-            <ImageView
-                android:id="@+id/ivAvatar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="13dp"
-                android:layout_marginBottom="37dp"
-                android:src="@drawable/ic_baseline_baby_changing_station" />
-
-            <TextView
-                android:id="@+id/tvDescriptionDetails"
-                android:layout_width="196dp"
-                android:layout_height="26dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="13dp"
-                android:layout_marginBottom="17dp"
-                android:text="@string/repo_description"
-                android:textSize="20sp" />
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="15dp"
-                android:gravity="center">
-
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
                 <ImageView
-                    android:id="@+id/imageViewStars"
+                    android:id="@+id/ivAvatar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:src="@drawable/ic_baseline_stars" />
-
+                    android:layout_gravity="center"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginBottom="37dp"
+                    android:src="@drawable/ic_baseline_baby_changing_station" />
                 <TextView
-                    android:id="@+id/tvStarsDetails"
+                    android:id="@+id/tvDescriptionDetails"
                     android:layout_width="196dp"
                     android:layout_height="26dp"
                     android:layout_gravity="center"
-                    android:layout_marginStart="20dp"
-                    android:layout_toRightOf="@id/imageViewStars"
-                    android:text="@string/number_of_stars"
-                    android:textSize="19sp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:gravity="center">
-
-                <ImageView
-                    android:id="@+id/imageViewForks"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginBottom="17dp"
+                    android:text="@string/repo_description"
+                    android:textSize="20sp" />
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:src="@drawable/ic_baseline_fork" />
-
-                <TextView
-                    android:id="@+id/tvForkNumberDetails"
-                    android:layout_width="196dp"
-                    android:layout_height="26dp"
                     android:layout_gravity="center"
-                    android:layout_marginStart="20dp"
-                    android:layout_toRightOf="@id/imageViewForks"
-                    android:text="@string/number_of_forks"
-                    android:textSize="19sp" />
-            </RelativeLayout>
-
-            <WebView
-                android:id="@+id/wvReadme"
-                android:layout_width="196dp"
-                android:layout_height="360dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="33dp"
-                android:layout_marginBottom="17dp" />
-        </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+                    android:layout_marginTop="15dp"
+                    android:gravity="center">
+                    <ImageView
+                        android:id="@+id/imageViewStars"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:src="@drawable/ic_baseline_stars" />
+                    <TextView
+                        android:id="@+id/tvStarsDetails"
+                        android:layout_width="196dp"
+                        android:layout_height="26dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="20dp"
+                        android:layout_toRightOf="@id/imageViewStars"
+                        android:text="@string/number_of_stars"
+                        android:textSize="19sp" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center">
+                    <ImageView
+                        android:id="@+id/imageViewForks"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:src="@drawable/ic_baseline_fork" />
+                    <TextView
+                        android:id="@+id/tvForkNumberDetails"
+                        android:layout_width="196dp"
+                        android:layout_height="26dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="20dp"
+                        android:layout_toRightOf="@id/imageViewForks"
+                        android:text="@string/number_of_forks"
+                        android:textSize="19sp" />
+                </RelativeLayout>
+                <WebView
+                    android:id="@+id/wvReadme"
+                    android:layout_width="196dp"
+                    android:layout_height="360dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="33dp"
+                    android:layout_marginBottom="17dp" />
+            </LinearLayout>
+        </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</LinearLayout>

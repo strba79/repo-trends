@@ -18,18 +18,14 @@ import javax.net.ssl.SSLContext
 
 @Module
 class NetModule {
-
     @Singleton
     @Provides
     fun loggingInterceptor() = HttpLoggingInterceptor()
-
-
     @Singleton
     @Provides
     fun okHttpClient(loggingInterceptor: HttpLoggingInterceptor) = OkHttpClient.Builder()
         .addInterceptor(loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY))
         .build()
-
     @Singleton
     @Provides
     fun retrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
@@ -37,7 +33,6 @@ class NetModule {
         .addConverterFactory(GsonConverterFactory.create())
         .client(okHttpClient)
         .build()
-
     @Singleton
     @Provides
     fun repoJsonApi(okHttpClient: OkHttpClient): GitHubApi =

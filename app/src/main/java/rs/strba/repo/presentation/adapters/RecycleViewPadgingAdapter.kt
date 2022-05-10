@@ -12,8 +12,11 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import rs.strba.repo.R
 import rs.strba.repo.data.model.Item
+import rs.strba.repo.domain.usecase.ProgressBarStateUseCase
 
-class RecyclerViewAdapter(private val listener: OnItemClickListener) :
+class RecyclerViewAdapter(
+    private val listener: OnItemClickListener
+) :
     PagingDataAdapter<Item, RecyclerViewAdapter.MyViewHolder>(DiffUtilCallBack()) {
 
 
@@ -32,11 +35,9 @@ class RecyclerViewAdapter(private val listener: OnItemClickListener) :
 
     inner class MyViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView), View.OnClickListener {
-
         init {
             itemView.setOnClickListener(this)
         }
-
         private val name: TextView = itemView.findViewById(R.id.tvTitle)
         private val starNumber: TextView = itemView.findViewById(R.id.tvStarNumber)
         private val forkNumber: TextView = itemView.findViewById(R.id.tvForkNumber)

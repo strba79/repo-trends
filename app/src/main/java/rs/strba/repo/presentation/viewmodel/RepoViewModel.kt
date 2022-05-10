@@ -1,5 +1,6 @@
 package rs.strba.repo.presentation.viewmodel
 
+
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
@@ -12,6 +13,7 @@ import kotlinx.coroutines.flow.Flow
 import rs.strba.repo.data.model.Item
 import rs.strba.repo.data.pagingdatasource.RepoPagingSource
 import rs.strba.repo.domain.usecase.GetReposUseCase
+import rs.strba.repo.domain.usecase.ProgressBarStateUseCase
 import rs.strba.repo.networking.GitHubApi
 
 class RepoViewModel(
@@ -26,9 +28,11 @@ class RepoViewModel(
         emit(repoFetchList)
     }
 
-    fun getReposPaged(): Flow<PagingData<Item>> {
+    fun getReposPaged(progressBarUseCase: ProgressBarStateUseCase): Flow<PagingData<Item>> {
         return Pager(config = PagingConfig(pageSize = 30, maxSize = 1000),
-            pagingSourceFactory = { RepoPagingSource(gitHubApi) }).flow.cachedIn(viewModelScope)
+            pagingSourceFactory = {
+                RepoPagingSource (gitHubApi,progressBarUseCase)
+            }).flow.cachedIn(viewModelScope)
     }
 
 }

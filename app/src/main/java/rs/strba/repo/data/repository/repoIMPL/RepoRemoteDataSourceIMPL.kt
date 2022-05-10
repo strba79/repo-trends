@@ -16,18 +16,14 @@ import java.util.*
 
 class RepoRemoteDataSourceIMPL(private val gitHubApi: GitHubApi) : RepoRemoteDataSource {
 
-
     sealed class Result {
         data class Success(val quakes: List<Item>) : Result()
         object Failure : Result()
     }
-
     override suspend fun getReposTest(): Result {
         return withContext(Dispatchers.IO) {
             try {
-                Log.i("checkData","ok")
                 val response = gitHubApi.getRepos("created:>+${sevenDaysAgo()}",1)
-                Log.i("response", response.body()?.items?.size.toString())
                 if (response.isSuccessful && response.body() != null) {
                     Log.i(TAG, response.body()!!.items.size.toString())
                     return@withContext Result.Success(response.body()!!.items)
@@ -44,7 +40,6 @@ class RepoRemoteDataSourceIMPL(private val gitHubApi: GitHubApi) : RepoRemoteDat
             }
         }
     }
-
     override suspend fun getRepos(): List<Item> {
         return withContext(Dispatchers.IO) {
             try {
@@ -59,7 +54,6 @@ class RepoRemoteDataSourceIMPL(private val gitHubApi: GitHubApi) : RepoRemoteDat
             }
         }
     }
-
     private fun sevenDaysAgo(): String {
         val calendar = Calendar.getInstance()
         calendar.add(Calendar.DAY_OF_YEAR, -7)
